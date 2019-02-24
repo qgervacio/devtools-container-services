@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+  mysql: # https://github.com/laradock/laradock/issues/1390
+    image: ${DS_MYSQL_IMG}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DS_MYSQL_PASSWORD}
+    ports:
+      - ${DS_MYSQL_PORT}:3306
+  
+  mysql-phpmyadmin:
+    image: ${DS_MYSQL_IMGPMD}
+    restart: always
+    depends_on:
+      - mysql
+    links:
+      - mysql
+    environment:
+      - MYSQL_USERNAME=${DS_MYSQL_USERNAME}
+      - MYSQL_ROOT_PASSWORD=${DS_MYSQL_PASSWORD}
+      - PMA_HOST=mysql
+    ports:
+      - ${DS_MYSQL_PORTPMD}:80
+
+  mariadb:
+    image: ${DS_MARIADB_IMG}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DS_MYSQL_PASSWORD}
+    ports:
+      - ${DS_MYSQL_PORT}:3306
+  
+  mariadb-phpmyadmin:
+    image: ${DS_MYSQL_IMGPMD}
+    restart: always
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    environment:
+      - MYSQL_USERNAME=${DS_MYSQL_USERNAME}
+      - MYSQL_ROOT_PASSWORD=${DS_MYSQL_PASSWORD}
+      - PMA_HOST=mariadb
+    ports:
+      - ${DS_MYSQL_PORTPMD}:80
