@@ -1,6 +1,6 @@
 # Developer Tools: Container Services
 
-Bunch of Docker Compose files suitable for starting services to support developments
+Bunch of services suitable for developments.
 
 ## Database
 
